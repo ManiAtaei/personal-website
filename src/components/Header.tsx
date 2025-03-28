@@ -8,6 +8,10 @@ export default function Header() {
           &lt; C/ &gt; SinanTokmak
         </h1>
       </div>
+
+      <div>
+        
+      </div>
     </div>
   );
 }

@@ -1,14 +1,116 @@
+/* app/globals.css */
+
+/* وارد کردن فونت IBM Plex Mono (باید در ابتدا باشه) */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+/* وارد کردن Tailwind */
 @import "tailwindcss";
+
+/* وارد کردن DaisyUI */
 @plugin "daisyui";
 
+/* تنظیمات DaisyUI */
 @plugin "daisyui" {
   themes: light --default, dark --prefersdark;
 }
 
-/* app/globals.css */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+/* تنظیمات Tailwind برای اضافه کردن فونت سفارشی */
+@tailwind utilities;
 
-/* اعمال فونت به کل پروژه */
+@layer utilities {
+  /* تعریف فونت سفارشی */
+  .font-ibm {
+    font-family: "IBM Plex Mono", monospace;
+  }
+
+  /* وزن‌های مختلف */
+  .font-ibm-thin {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 100;
+    font-style: normal;
+  }
+
+  .font-ibm-extralight {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 200;
+    font-style: normal;
+  }
+
+  .font-ibm-light {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  .font-ibm-regular {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .font-ibm-medium {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  .font-ibm-semibold {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  .font-ibm-bold {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  /* وزن‌های ایتالیک */
+  .font-ibm-thin-italic {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 100;
+    font-style: italic;
+  }
+
+  .font-ibm-extralight-italic {
+    font-family: "IBM Ple x Mono", monospace;
+    font-weight: 200;
+    font-style: italic;
+  }
+
+  .font-ibm-light-italic {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  .font-ibm-regular-italic {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  .font-ibm-medium-italic {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  .font-ibm-semibold-italic {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  .font-ibm-bold-italic {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 700;
+    font-style: italic;
+  }
+}
+
+/* اعمال فونت به کل پروژه (اختیاری) */
 body {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
 }
