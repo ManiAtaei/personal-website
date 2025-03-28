@@ -1,12 +1,12 @@
-import React from 'react'
-import Container from '@/components/Countainer'
+import React from "react";
+// import Container from "@/components/Countainer";
+// import Header from "@/components/Header";
+import Holder from "@/Feature/Holder";
 
 export default function page() {
   return (
-    <Container>
-      <div>
-        
-      </div>
-    </Container>
-  )
+    <div>
+      <Holder/>
+    </div>
+  );
 }
