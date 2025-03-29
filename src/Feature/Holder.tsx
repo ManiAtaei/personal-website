@@ -6,9 +6,8 @@ import P2 from "./P2";
 import P3 from "./P3";
 import P4 from "./P4";
 import P5 from "./P5";
-import P6 from "./P6";
 
-type PageNumber = 1 | 2 | 3 | 4 | 5 | 6;
+type PageNumber = 1 | 2 | 3 | 4 | 5;
 
 export default function Holder() {
   const [activePage, setActivePage] = useState<PageNumber>(1);
@@ -17,9 +16,7 @@ export default function Holder() {
   const touchEndRef = useRef<number | null>(null);
   const lastTransitionTime = useRef<number>(0);
   
-  // حداقل فاصله برای تشخیص سوایپ (به پیکسل)
   const minSwipeDistance = 70;
-  // زمان حداقل بین انتقال‌ها (میلی‌ثانیه)
   const transitionCooldown = 500;
 
   const goToNextPage = useCallback(() => {
@@ -27,11 +24,9 @@ export default function Holder() {
     if (now - lastTransitionTime.current < transitionCooldown) return;
     
     setActivePage((prev) => {
-      if (prev < 6) {
-        lastTransitionTime.current = now;
-        return (prev + 1) as PageNumber;
-      }
-      return prev;
+      lastTransitionTime.current = now;
+      // Modified to loop back to page 1 when reaching the end
+      return prev === 5 ? 1 as PageNumber : (prev + 1) as PageNumber;
     });
   }, []);
 
@@ -40,11 +35,9 @@ export default function Holder() {
     if (now - lastTransitionTime.current < transitionCooldown) return;
     
     setActivePage((prev) => {
-      if (prev > 1) {
-        lastTransitionTime.current = now;
-        return (prev - 1) as PageNumber;
-      }
-      return prev;
+      lastTransitionTime.current = now;
+      // Modified to loop to page 5 when going back from page 1
+      return prev === 1 ? 5 as PageNumber : (prev - 1) as PageNumber;
     });
   }, []);
 
@@ -57,27 +50,22 @@ export default function Holder() {
     const isAtBottom =
       content.scrollHeight - content.scrollTop - content.clientHeight <= 5;
 
-    // اگر اسکرول به سمت پایین و به آخر محتوا رسیده، صفحه بعدی
     if (e.deltaY > 0 && isAtBottom) {
       goToNextPage();
     }
-    // اگر اسکرول به سمت بالا و به اول محتوا رسیده، صفحه قبلی
     else if (e.deltaY < 0 && isAtTop) {
       goToPrevPage();
     }
   }, [goToNextPage, goToPrevPage]);
 
-  // مدیریت شروع لمس
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     touchStartRef.current = e.touches[0].clientY;
     touchEndRef.current = null;
   };
 
-  // مدیریت پایان لمس
   const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
     if (!touchStartRef.current) return;
     
-    // آخرین موقعیت لمس را ذخیره می‌کنیم
     touchEndRef.current = e.changedTouches[0].clientY;
     
     const content = contentRef.current;
@@ -92,65 +80,51 @@ export default function Holder() {
       const isSignificantSwipe = Math.abs(distance) > minSwipeDistance;
       
       if (isSignificantSwipe) {
-        // سوایپ به بالا (حرکت انگشت به بالا - مقدار مثبت)
         if (distance > 0 && isAtBottom) {
           goToNextPage();
         } 
-        // سوایپ به پایین (حرکت انگشت به پایین - مقدار منفی)
         else if (distance < 0 && isAtTop) {
           goToPrevPage();
         }
       }
     }
     
-    // ریست کردن مقادیر لمس
     touchStartRef.current = null;
   };
 
-  // const MobileNavigationButtons = () => (
-  //   <div className="mobile-navigation" style={{
-  //     position: 'fixed',
-  //     bottom: '20px',
-  //     left: '50%',
-  //     transform: 'translateX(-50%)',
-  //     display: 'flex',
-  //     gap: '20px',
-  //     zIndex: 1000,
-  //   }}>
-  //     <button 
-  //       onClick={goToPrevPage}
-  //       disabled={activePage === 1}
-  //       style={{
-  //         width: '50px',
-  //         height: '50px',
-  //         borderRadius: '50%',
-  //         backgroundColor: activePage === 1 ? '#ccc' : '#333',
-  //         color: 'white',
-  //         border: 'none',
-  //         fontSize: '20px',
-  //         cursor: activePage === 1 ? 'default' : 'pointer',
-  //       }}
-  //     >
-  //       ↑
-  //     </button>
-  //     <button 
-  //       onClick={goToNextPage}
-  //       disabled={activePage === 6}
-  //       style={{
-  //         width: '50px',
-  //         height: '50px',
-  //         borderRadius: '50%',
-  //         backgroundColor: activePage === 6 ? '#ccc' : '#333',
-  //         color: 'white',
-  //         border: 'none',
-  //         fontSize: '20px',
-  //         cursor: activePage === 6 ? 'default' : 'pointer',
-  //       }}
-  //     >
-  //       ↓
-  //     </button>
-  //   </div>
-  // );
+  // Navigation Indicators
+  const NavigationIndicators = () => (
+    <div className="navigation-indicators" style={{
+      position: 'fixed',
+      right: '20px',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '10px',
+      zIndex: 1000,
+    }}>
+      {[1, 2, 3, 4, 5].map((page) => (
+        <div 
+          key={page}
+          onClick={() => {
+            const now = Date.now();
+            if (now - lastTransitionTime.current < transitionCooldown) return;
+            lastTransitionTime.current = now;
+            setActivePage(page as PageNumber);
+          }}
+          style={{
+            width: '10px',
+            height: '10px',
+            borderRadius: '50%',
+            backgroundColor: activePage === page ? '#fff' : 'rgba(255, 255, 255, 0.5)',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease'
+          }}
+        />
+      ))}
+    </div>
+  );
 
   const pages: Record<PageNumber, JSX.Element> = {
     1: <P1 />,
@@ -158,7 +132,6 @@ export default function Holder() {
     3: <P3 />,
     4: <P4 />,
     5: <P5 />,
-    6: <P6 />,
   };
 
   const variants = {
@@ -195,8 +168,7 @@ export default function Holder() {
         </AnimatePresence>
       </div>
       
-      {/* دکمه‌های نویگیشن برای موبایل
-      <MobileNavigationButtons /> */}
+      <NavigationIndicators />
     </div>
   );
 }
