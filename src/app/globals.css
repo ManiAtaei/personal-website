@@ -14,7 +14,7 @@
   themes: light --default, dark --prefersdark;
 }
 
-/* تنظیمات Tailwind برای اضافه کردن فونت سفارشی */
+/* تنظیمات Tailwind برای اضافه کردن فونت سفارشی و Breakpoint */
 @tailwind utilities;
 
 @layer utilities {
@@ -74,7 +74,7 @@
   }
 
   .font-ibm-extralight-italic {
-    font-family: "IBM Ple x Mono", monospace;
+    font-family: "IBM Plex Mono", monospace;
     font-weight: 200;
     font-style: italic;
   }
@@ -110,7 +110,7 @@
   }
 }
 
-/* اعمال فونت به کل پروژه (اختیاری) */
+
 body {
   font-family: "IBM Plex Mono", monospace;
 }

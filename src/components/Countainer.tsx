@@ -6,6 +6,6 @@ interface ContainerProps {
 
 export default function Container({ children }: ContainerProps) {
   return (
-    <div className='px-[128px]'>{children}</div>
+    <div className=' px-4 md:px-[128px]'>{children}</div>
   );
 }
