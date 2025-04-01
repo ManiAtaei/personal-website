@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "@/components/Countainer";
 import Header from "@/components/Header";
-import { GoDownload, GoMail } from "react-icons/go";
+import { GoDownload } from "react-icons/go";
 
 interface ProfileData {
   name: string;

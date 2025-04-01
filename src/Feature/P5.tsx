@@ -13,15 +13,13 @@ function ContactPage() {
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-teal-400 mb-2">Contact</h1>
             <div className="w-32 h-1 bg-teal-400 mx-auto mb-4"></div>
-            <p className="text-gray-300">I'm currently available for freelance work</p>
+            <p className="text-gray-300">I&apos;m currently available for freelance work</p>
           </div>
 
-          {/* Send Message Box */}
           <div className="border border-teal-400 rounded-md p-5 inline-block mx-auto mb-10">
             <p className="text-teal-400 text-lg">Send Me A Message</p>
           </div>
 
-          {/* Contact Form */}
           <form className="w-full">
             <div className="flex flex-col md:flex-row gap-6 mb-6">
               <div className="w-full md:w-1/2">
@@ -75,8 +73,6 @@ function ContactPage() {
 
       <footer className="py-4 border-t border-gray-800">
         <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
-          
-          
           <div className="flex items-center gap-5">
             <Link href="/privacy" className="text-sm text-gray-500 hover:text-teal-400">
               Privacy Policy
@@ -97,8 +93,6 @@ function ContactPage() {
               <FaYoutube size={20} />
             </a>
           </div>
-          
-          
         </div>
       </footer>
     </div>

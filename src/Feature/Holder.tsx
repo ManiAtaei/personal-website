@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useCallback, useRef, JSX } from "react";
+import React, { useState,  useCallback, useRef, JSX } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import P1 from "./P1";
 import P2 from "./P2";
