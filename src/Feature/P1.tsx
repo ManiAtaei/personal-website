@@ -25,7 +25,7 @@ const profile: ProfileData = {
   website: "www.maniataei.ir",
   skills: ["HTML", "CSS", "JS", "React", "Next"],
   experience: "2",
-  languages: 4,
+  languages: 2,
   tools: 8,
 };
 
@@ -119,10 +119,7 @@ const P1: React.FC = () => {
                 you’re looking for a developer that likes to get stuff done,
               </p>
 
-              <button className="flex items-center gap-2 text-[#12F7D6] hover:text-[#0DE0C2] transition-colors">
-                Let’s Talk
-                <GoMail size={20} />
-              </button>
+              
             </div>
 
             <div className="bg-[#292F36] w-[220px] flex flex-col items-center mt-8 lg:mt-0 py-8 px-6 rounded-[60px] gap-8">

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef, JSX } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import P1 from "./P1";
 import P2 from "./P2";
@@ -25,7 +25,6 @@ export default function Holder() {
     
     setActivePage((prev) => {
       lastTransitionTime.current = now;
-      // Modified to loop back to page 1 when reaching the end
       return prev === 5 ? 1 as PageNumber : (prev + 1) as PageNumber;
     });
   }, []);
@@ -36,7 +35,6 @@ export default function Holder() {
     
     setActivePage((prev) => {
       lastTransitionTime.current = now;
-      // Modified to loop to page 5 when going back from page 1
       return prev === 1 ? 5 as PageNumber : (prev - 1) as PageNumber;
     });
   }, []);
@@ -92,7 +90,6 @@ export default function Holder() {
     touchStartRef.current = null;
   };
 
-  // Navigation Indicators
   const NavigationIndicators = () => (
     <div className="navigation-indicators" style={{
       position: 'fixed',
